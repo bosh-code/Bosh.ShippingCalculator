@@ -19,4 +19,14 @@ public class ShippingCalculatorTests
         Assert.AreEqual(15, large);
         Assert.AreEqual(25, xl);
     }
+
+    [Test]
+    public void ExceptionTests()
+    {
+        // Act
+        var exception = Assert.Throws<ArgumentException>(() => ShippingCalculator.GetPrice(-1));
+
+        // Assert
+        Assert.That(exception?.Message, Is.EqualTo("Size must be greater than 0"));
+    }
 }
