@@ -6,6 +6,7 @@ public static class ShippingCalculator
     {
         return size switch
         {
+            <= 0 => throw new ArgumentException("Size must be greater than 0"),
             < 10 => 3,
             < 50 => 8,
             < 100 => 15,
