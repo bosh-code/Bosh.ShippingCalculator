@@ -8,10 +8,11 @@ public class ShippingCalculatorTests
     public void GetPrice()
     {
         // Act
-        var small = ShippingCalculator.GetPrice(6);
-        var medium = ShippingCalculator.GetPrice(42);
-        var large = ShippingCalculator.GetPrice(75);
-        var xl = ShippingCalculator.GetPrice(101);
+        var small = ShippingCalculator.GetPrice(6, false);
+        var medium = ShippingCalculator.GetPrice(42, false);
+        var mediumSpeedy = ShippingCalculator.GetPrice(42, true);
+        var large = ShippingCalculator.GetPrice(75, false);
+        var xl = ShippingCalculator.GetPrice(101, false);
 
         // Assert
         Assert.AreEqual(3, small);
@@ -24,7 +25,7 @@ public class ShippingCalculatorTests
     public void ExceptionTests()
     {
         // Act
-        var exception = Assert.Throws<ArgumentException>(() => ShippingCalculator.GetPrice(-1));
+        var exception = Assert.Throws<ArgumentException>(() => ShippingCalculator.GetPrice(-1, false));
 
         // Assert
         Assert.That(exception?.Message, Is.EqualTo("Size must be greater than 0"));

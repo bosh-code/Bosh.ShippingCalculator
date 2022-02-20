@@ -2,7 +2,7 @@
 
 public static class ShippingCalculator
 {
-    public static int GetPrice(int size)
+    public static int GetPrice(int size, bool speedyShipping)
     {
         return size switch
         {
