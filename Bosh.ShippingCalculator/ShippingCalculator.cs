@@ -2,7 +2,8 @@
 
 public static class ShippingCalculator
 {
-    public static Order GetPrice(int size, bool speedyShipping)
+    
+    public static Order PlaceOrder(int size, bool speedyShipping)
     {
         return new Order(size, speedyShipping);
     }
