@@ -3,8 +3,8 @@
 public static class ShippingCalculator
 {
     
-    public static Order PlaceOrder(int size, bool speedyShipping)
+    public static Order PlaceOrder(double size, bool speedyShipping, double weight)
     {
-        return new Order(size, speedyShipping);
+        return new Order(size, speedyShipping, weight);
     }
 }

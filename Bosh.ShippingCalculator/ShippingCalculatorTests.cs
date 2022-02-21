@@ -18,8 +18,10 @@ public class ShippingCalculatorTests
 
         // Assert
         Assert.AreEqual(3, small.Price);
+        Assert.AreEqual(5, smallOverweight.Price);
         Assert.AreEqual(8, medium.Price);
         Assert.AreEqual(16, mediumSpeedy.Price);
+        Assert.AreEqual(20, mediumSpeedyOverweight.Price);
         Assert.AreEqual(15, large.Price);
         Assert.AreEqual(25, xl.Price);
     }
@@ -28,9 +30,9 @@ public class ShippingCalculatorTests
     public void ExceptionTests()
     {
         // Act
-        var exception = Assert.Throws<ArgumentException>(() => ShippingCalculator.PlaceOrder(-1, false));
+        var exception = Assert.Throws<ArgumentException>(() => ShippingCalculator.PlaceOrder(-1, false, -1));
 
         // Assert
-        Assert.That(exception?.Message, Is.EqualTo("Size must be greater than 0"));
+        Assert.That(exception?.Message, Is.EqualTo("Size must be greater than 0.00"));
     }
 }
