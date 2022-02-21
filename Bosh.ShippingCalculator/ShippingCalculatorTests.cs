@@ -15,15 +15,21 @@ public class ShippingCalculatorTests
         var mediumSpeedyOverweight = ShippingCalculator.PlaceOrder(42, true, 3.5);
         var large = ShippingCalculator.PlaceOrder(75, false, 5.4);
         var xl = ShippingCalculator.PlaceOrder(101, false, 9.8);
+        var heavyUnder50 = ShippingCalculator.PlaceOrder(101, false, 49.8);
+        var heavyOver50 = ShippingCalculator.PlaceOrder(101, false, 52.8);
+        var heavyOver50Speedy = ShippingCalculator.PlaceOrder(101, true, 52.8);
 
         // Assert
-        Assert.AreEqual(3, small.Price);
-        Assert.AreEqual(5, smallOverweight.Price);
-        Assert.AreEqual(8, medium.Price);
-        Assert.AreEqual(16, mediumSpeedy.Price);
-        Assert.AreEqual(20, mediumSpeedyOverweight.Price);
-        Assert.AreEqual(15, large.Price);
-        Assert.AreEqual(25, xl.Price);
+        Assert.AreEqual(3.0, small.Price);
+        Assert.AreEqual(5.4, smallOverweight.Price);
+        Assert.AreEqual(8.0, medium.Price);
+        Assert.AreEqual(16.0, mediumSpeedy.Price);
+        Assert.AreEqual(30.0, mediumSpeedyOverweight.Price);
+        Assert.AreEqual(15.0, large.Price);
+        Assert.AreEqual(25.0, xl.Price);
+        Assert.AreEqual(75.0, heavyUnder50.Price);
+        Assert.AreEqual(77.8, heavyOver50.Price);
+        Assert.AreEqual(155.6, heavyOver50Speedy.Price);
     }
 
     [Test]

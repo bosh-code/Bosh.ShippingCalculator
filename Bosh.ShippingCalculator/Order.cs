@@ -8,17 +8,37 @@ public class Order
     public double Price
     {
         // Getting the price returns the price * 2 if speedy shipping is applied
-        get => SpeedyShipping ? _price * 2.0 : _price;
+        get => SpeedyShipping ? Math.Round(_price * 2.0, 1, MidpointRounding.AwayFromZero) : _price;
         // Assume that the overweight charge is applied when the order is created.
-        private init => _price = Overweight ? value + 2.0 : value;
+        private init
+        {
+            if (Overweight && Weight is > 10 and < 50)
+            {
+                _price = Math.Round(value + 50.0, 1, MidpointRounding.AwayFromZero); // XL under 50
+            }
+            else if (Overweight && Weight > 50)
+            {
+                _price = Math.Round(value + 50.0 + Weight - 50.0, 1, MidpointRounding.AwayFromZero); // XL over 50
+            }
+            else if (Overweight && Weight < 10)
+            {
+                _price = Math.Round(value + Weight * 2.0, 1, MidpointRounding.AwayFromZero); // Normal overweight
+            }
+            else
+            {
+                _price = value; // Normal
+            }
+        }
     }
 
     private bool SpeedyShipping { get; }
+    private double Weight { get; }
     private bool Overweight { get; }
 
     public Order(double size, bool speedyShipping, double weight)
     {
         SpeedyShipping = speedyShipping;
+        Weight = weight;
         Overweight = CalculateOverweight(size, weight);
         Price = CalculatePrice(size); // Price relies on weight
     }
