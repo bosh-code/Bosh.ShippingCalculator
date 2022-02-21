@@ -15,10 +15,10 @@ public class ShippingCalculatorTests
         var xl = ShippingCalculator.GetPrice(101, false);
 
         // Assert
-        Assert.AreEqual(3, small);
-        Assert.AreEqual(8, medium);
-        Assert.AreEqual(15, large);
-        Assert.AreEqual(25, xl);
+        Assert.AreEqual(3, small.Price);
+        Assert.AreEqual(8, medium.Price);
+        Assert.AreEqual(15, large.Price);
+        Assert.AreEqual(25, xl.Price);
     }
 
     [Test]
