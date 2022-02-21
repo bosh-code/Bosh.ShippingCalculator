@@ -5,7 +5,7 @@ namespace Bosh.ShippingCalculator;
 public class ShippingCalculatorTests
 {
     [Test]
-    public void GetPrice()
+    public void OrderTests()
     {
         // Act
         var small = ShippingCalculator.PlaceOrder(6, false);
