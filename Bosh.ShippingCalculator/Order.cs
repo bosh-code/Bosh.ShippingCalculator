@@ -12,22 +12,13 @@ public class Order
         // Assume that the overweight charge is applied when the order is created.
         private init
         {
-            if (Overweight && Weight is > 10 and < 50)
+            _price = Overweight switch
             {
-                _price = Math.Round(value + 50.0, 1, MidpointRounding.AwayFromZero); // XL under 50
-            }
-            else if (Overweight && Weight > 50)
-            {
-                _price = Math.Round(value + 50.0 + Weight - 50.0, 1, MidpointRounding.AwayFromZero); // XL over 50
-            }
-            else if (Overweight && Weight < 10)
-            {
-                _price = Math.Round(value + Weight * 2.0, 1, MidpointRounding.AwayFromZero); // Normal overweight
-            }
-            else
-            {
-                _price = value; // Normal
-            }
+                true when Weight is > 10 and < 50 => Math.Round(value + 50.0, 1, MidpointRounding.AwayFromZero),
+                true when Weight > 50 => Math.Round(value + 50.0 + Weight - 50.0, 1, MidpointRounding.AwayFromZero),
+                true when Weight < 10 => Math.Round(value + Weight * 2.0, 1, MidpointRounding.AwayFromZero),
+                _ => value
+            };
         }
     }
 
