@@ -4,7 +4,7 @@ public static class ShippingCalculator
 {
     public static int GetPrice(int size, bool speedyShipping)
     {
-        return size switch
+        var price = size switch
         {
             <= 0 => throw new ArgumentException("Size must be greater than 0"),
             < 10 => 3,
@@ -12,5 +12,6 @@ public static class ShippingCalculator
             < 100 => 15,
             >= 100 => 25
         };
+        return speedyShipping ? price * 2 : price;
     }
 }
