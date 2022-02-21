@@ -9,6 +9,7 @@ public class Order
     {
         // Getting the price returns the price * 2 if speedy shipping is applied
         get => SpeedyShipping ? _price * 2.0 : _price;
+        // Assume that the overweight charge is applied when the order is created.
         private init => _price = Overweight ? value + 2.0 : value;
     }
 
