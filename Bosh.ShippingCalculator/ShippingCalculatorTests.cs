@@ -8,11 +8,13 @@ public class ShippingCalculatorTests
     public void OrderTests()
     {
         // Act
-        var small = ShippingCalculator.PlaceOrder(6, false);
-        var medium = ShippingCalculator.PlaceOrder(42, false);
-        var mediumSpeedy = ShippingCalculator.PlaceOrder(42, true);
-        var large = ShippingCalculator.PlaceOrder(75, false);
-        var xl = ShippingCalculator.PlaceOrder(101, false);
+        var small = ShippingCalculator.PlaceOrder(6, false, 0.7);
+        var smallOverweight = ShippingCalculator.PlaceOrder(6, false, 1.2);
+        var medium = ShippingCalculator.PlaceOrder(42, false, 2.9);
+        var mediumSpeedy = ShippingCalculator.PlaceOrder(42, true, 2.8);
+        var mediumSpeedyOverweight = ShippingCalculator.PlaceOrder(42, true, 3.5);
+        var large = ShippingCalculator.PlaceOrder(75, false, 5.4);
+        var xl = ShippingCalculator.PlaceOrder(101, false, 9.8);
 
         // Assert
         Assert.AreEqual(3, small.Price);
