@@ -18,33 +18,21 @@ public class Order
     public Order(double size, bool speedyShipping, double weight)
     {
         SpeedyShipping = speedyShipping;
-        Overweight = calculateOverweight(size, weight);
+        Overweight = CalculateOverweight(size, weight);
         Price = CalculatePrice(size); // Price relies on weight
     }
 
-    private bool calculateOverweight(double size, double weight)
+    private static bool CalculateOverweight(double size, double weight)
     {
-        if (size < 10 && weight > 1)
+        return size switch
         {
-            return true;
-        }
-
-        if (size < 50 && weight > 3)
-        {
-            return true;
-        }
-
-        if (size < 100 && weight > 6)
-        {
-            return true;
-        }
-
-        if (size >= 100 && weight > 10)
-        {
-            return true;
-        }
-
-        return false;
+            < 1 when weight <= 0 => throw new ArgumentException("Weight must be greater than 0.00"),
+            < 10 when weight > 1 => true,
+            < 50 when weight > 3 => true,
+            < 100 when weight > 6 => true,
+            >= 100 when weight > 10 => true,
+            _ => false // Also catches NaN / Errors
+        };
     }
 
     private static double CalculatePrice(double size)
@@ -55,7 +43,8 @@ public class Order
             < 10 => 3,
             < 50 => 8,
             < 100 => 15,
-            >= 100 => 25
+            >= 100 => 25,
+            _ => throw new ArgumentOutOfRangeException(nameof(size), size, "Size must be valid")
         };
     }
 }

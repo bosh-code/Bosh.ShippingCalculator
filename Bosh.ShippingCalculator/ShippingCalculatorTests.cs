@@ -30,9 +30,13 @@ public class ShippingCalculatorTests
     public void ExceptionTests()
     {
         // Act
-        var exception = Assert.Throws<ArgumentException>(() => ShippingCalculator.PlaceOrder(-1, false, -1));
+        var sizeArgumentException = Assert.Throws<ArgumentException>(() => ShippingCalculator.PlaceOrder(-1, false, 10));
+        var sizeArgumentOutOfRangeException = Assert.Throws<ArgumentOutOfRangeException>(() => ShippingCalculator.PlaceOrder(Double.NaN, false, 10));
+        var weightArgumentException = Assert.Throws<ArgumentException>(() => ShippingCalculator.PlaceOrder(.1, false, -1));
 
         // Assert
-        Assert.That(exception?.Message, Is.EqualTo("Size must be greater than 0.00"));
+        Assert.That(sizeArgumentException?.Message, Is.EqualTo("Size must be greater than 0.00"));
+        Assert.That(sizeArgumentOutOfRangeException?.Message, Is.EqualTo("Size must be valid (Parameter 'size')\nActual value was NaN."));
+        Assert.That(weightArgumentException?.Message, Is.EqualTo("Weight must be greater than 0.00"));
     }
 }
