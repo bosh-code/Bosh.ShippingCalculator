@@ -17,6 +17,7 @@ public class ShippingCalculatorTests
         // Assert
         Assert.AreEqual(3, small.Price);
         Assert.AreEqual(8, medium.Price);
+        Assert.AreEqual(16, mediumSpeedy.Price);
         Assert.AreEqual(15, large.Price);
         Assert.AreEqual(25, xl.Price);
     }
